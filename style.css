@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(138, 21, 0);
+}
+
+h1 {
+    color: white;
+    margin: 0;
+}
+
+table {
+    margin: 20px auto;
+}
+
+table td {
+    padding: 5px;
+}
+
+input[type=range] {
+    width: 200px;
+}
+
+input[type=number] {
+    width: 50px;
+    padding: 5px;
+    border: 2px solid rgb(175, 175, 175);
+    border-radius: 5px;
+}
+
+div, th, td {
+    text-align: center;
+}
+
+h2 {
+    padding: 20px 40px;
+    color: white;
+    background:linear-gradient(to right, rgb(138, 138, 138) 0%, rgb(53, 53, 53) 100%);
+    border-top: 5px solid rgb(138, 21, 0);
+    border-bottom: 5px solid rgb(138, 21, 0);
+    font-style: italic;
+}
+
+button {
+    padding: 20px 40px;
+    font-size: larger;
+    color: white;
+    background: linear-gradient(to right, rgb(138, 138, 138) 0%, rgb(53, 53, 53) 100%);
+    border: 5px solid silver;
+    border-radius: 20px;
+    border-color: rgb(100, 100, 100) rgb(22, 22, 22) rgb(22, 22, 22) rgb(100, 100, 100);
+}
+
+button:active {
+    /*background: linear-gradient(to right, rgba(96, 95, 95, 0.75) 0%, rgba(53, 53, 53, 0.75) 100%);*/
+    border-image-slice: 1;
+    border-color: rgb(22, 22, 22) rgb(100, 100, 100) rgb(100, 100, 100) rgb(22, 22, 22);
+}
+
+button:disabled {
+    width: 100%;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    background-color: azure;
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
+}

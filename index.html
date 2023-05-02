@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnYourMarks</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>OnYourMarks</h1>
+    </header>
+    <section>
+        <table>
+            <tr>
+                <th colspan="2">Manual or Random</th>
+            </tr>
+            <tr>
+                <td><label for="manual">Manual</label><input type="radio" name="choices" value="manual" checked></td>
+                <td><label for="random">Random</label><input type="radio" name="choices" value="random"></td>
+            </tr>
+        </table>
+        <table id="interval1">
+            <tr>
+                <th><label for="interval1">Setまでの時間(s)</label></th>
+            </tr>
+            <tr>
+                <td><input type="range" id="interval1_line" name="interval1_line" min="1" max="30" step="0.1" value="5">
+                </td>
+                <td><input type="number" id="interval1_number" min="1" max="30" value="5"></td>
+            </tr>
+        </table>
+        <table id="interval2">
+            <tr>
+                <th><label for="interval1">Startまでの時間(s)</label></th>
+            </tr>
+            <tr>
+                <td><input type="range" id="interval2_line" name="interval1_line" min="1" max="5" step="0.1" value="2">
+                </td>
+                <td><input type="number" id="interval2_number" min="1" max="5" value="2"></td>
+            </tr>
+        </table>
+        <div>
+            <button id="start">Let's start!!!</button>
+            <h2 id="status" class="hidden">On Your Marks</h2>
+        </div>
+    </section>
+    <footer>&copy;Miyanber 2023</footer>
+</body>
+
+</html>
