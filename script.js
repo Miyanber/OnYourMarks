@@ -53,6 +53,17 @@ window.addEventListener("DOMContentLoaded", () => {
         button.classList.remove("hidden");
         status.classList.add("hidden");
     })
+
+    const qrcode = document.querySelector("p");
+    const img = document.querySelector("img");
+    qrcode.addEventListener("click", () => {
+        if (qrcode.innerHTML == "QRコードを非表示") {
+            qrcode.innerHTML = "QRコードを表示";
+        } else {
+            qrcode.innerHTML = "QRコードを非表示";
+        }
+        img.classList.toggle("QRcode");
+    })
 });
 
 function sleep(sec) {
