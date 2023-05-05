@@ -36,6 +36,9 @@ window.addEventListener("DOMContentLoaded", () => {
         button.classList.add("hidden");
         status.classList.remove("hidden");
         status.innerHTML = "On Your Marks";
+        onYourMarks.load();
+        set.load();
+        go.load();
         await onYourMarks.play();
         await sleep(number1.value);
         status.innerHTML = "Set";
