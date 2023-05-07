@@ -15,7 +15,17 @@
     <header>
         <h1>OnYourMarks</h1>
     </header>
+
     <section>
+        <div class="measure">
+            <div class="hidden timerName">
+                <strong>タイム計測コード : </strong><span id="timerName"></span>
+            </div>
+            <a class="measure hidden" href="./setting/index.html">タイムを計測する</a>
+        </div>
+    </section>
+
+    <section class="starter">
         <table>
             <tr>
                 <th colspan="2">Manual or Random</th>
@@ -49,10 +59,27 @@
             <button id="start">Let's start!!!</button>
             <h2 id="status" class="hidden">On Your Marks</h2>
         </div>
-        <p>QRコードを表示</p>
+        <p class="QRcode">QRコードを表示</p>
         <img src="qrcode.png">
     </section>
+
+    <section class="timer hidden">
+        <div>
+            <button id="finish">!!!Finished!!!</button>
+            <p id="time"></p>
+            <button id="submit">データを送信</button>
+            <p id="data"></p>
+        </div>
+    </section>
+
+    <section>
+        <div class="measure">
+            <a class="measure hidden" href="./setting/index.html">タイム計測コード変更・役割変更</a>
+        </div>
+    </section>
+
     <footer>&copy;Miyanber 2023</footer>
+    <!--<footer style="visibility: hidden; position: static;">&copy;Miyanber 2023</footer>-->
 </body>
 
 </html>

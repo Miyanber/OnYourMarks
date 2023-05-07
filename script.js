@@ -51,13 +51,28 @@ window.addEventListener("DOMContentLoaded", () => {
             await sleep(number2.value);
         }
         status.innerHTML = "Go!";
-        await go.play();
+        await go.play().then(async () => {
+            const now = new Date().getTime();
+            if (localStorage.getItem("timerName") !== null) {
+                let paramater = `?timerName=${localStorage.getItem("timerName")}&status=starter&now=${now}`;
+                fetch('https://script.google.com/macros/s/AKfycbzbWTISwrAgyEYXsJFZrKEZ5FlMrRSgF2OZYm2RTlVVyktLQvWvxl0gAYRPfZdIz_QP/exec' + paramater, {
+                    "headers": {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then((response) => {
+                    return response.json();
+                }).then((json) => {
+                    const message = json.allData;
+                });
+            }
+        });
         await sleep(1);
         button.classList.remove("hidden");
         status.classList.add("hidden");
     })
 
-    const qrcode = document.querySelector("p");
+    const qrcode = document.querySelector("p.QRcode");
     const img = document.querySelector("img");
     qrcode.addEventListener("click", () => {
         if (qrcode.innerHTML == "QRコードを非表示") {
@@ -66,6 +81,61 @@ window.addEventListener("DOMContentLoaded", () => {
             qrcode.innerHTML = "QRコードを非表示";
         }
         img.classList.toggle("QRcode");
+    })
+
+    const measure = document.querySelectorAll("a.measure");
+    const measureDiv = document.querySelector("div.timerName");
+    const timerName = document.getElementById("timerName");
+    if (localStorage.getItem("timerName") === null) {
+        measure[0].classList.remove("hidden");
+    } else {
+        measureDiv.classList.remove("hidden");
+        measure[1].classList.remove("hidden");
+        timerName.innerHTML = localStorage.getItem("timerName");
+        button.innerHTML = "計測を開始";
+    }
+    if (localStorage.getItem("status") == "timer") {
+        const starter = document.querySelector("section.starter");
+        const timer = document.querySelector("section.timer");
+        starter.classList.add("hidden");
+        timer.classList.remove("hidden");
+    }
+
+    const finished = document.getElementById("finish");
+    const submit = document.getElementById("submit");
+    finished.addEventListener("click", () => {
+        let paramater = `?timerName=${localStorage.getItem("timerName")}&status=timer&now=${new Date().getTime()}`;
+        fetch('https://script.google.com/macros/s/AKfycbzbWTISwrAgyEYXsJFZrKEZ5FlMrRSgF2OZYm2RTlVVyktLQvWvxl0gAYRPfZdIz_QP/exec' + paramater, {
+            "headers": {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((json) => {
+            const message = json.allData;
+        });
+    })
+    submit.addEventListener("click", () => {
+        let paramater = `?timerName=${localStorage.getItem("timerName")}&status=record&now=${new Date().getTime()}`;
+        fetch('https://script.google.com/macros/s/AKfycbzbWTISwrAgyEYXsJFZrKEZ5FlMrRSgF2OZYm2RTlVVyktLQvWvxl0gAYRPfZdIz_QP/exec' + paramater, {
+            "headers": {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((json) => {
+            const array = json.allData;
+            const data_paragraph = document.getElementById("data");
+            data_paragraph.innerHTML = "";
+            for (let i = 0; i < array.length; i++) {
+                data_paragraph.innerHTML = data_paragraph.innerHTML + (i + 1) + "回目" + array[i];
+                if (i !== array.length - 1) {
+                    data_paragraph.innerHTML += "<br>";
+                }
+            }
+        });
     })
 });
 

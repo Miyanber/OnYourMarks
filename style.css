@@ -18,10 +18,17 @@ h1 {
 
 table {
     margin: 20px auto;
+    border-collapse: collapse;
 }
 
 table td {
     padding: 5px;
+}
+
+table.measure td, table.measure th{
+    padding: 50px 50px;
+    border-top: 5px solid rgb(138, 21, 0);
+    border-bottom: 5px solid rgb(138, 21, 0);
 }
 
 input[type=range] {
@@ -32,6 +39,19 @@ input[type=number] {
     width: 50px;
     padding: 5px;
     border: 2px solid rgb(175, 175, 175);
+    border-radius: 5px;
+}
+
+input.timerName {
+    width: 150px;
+    padding: 5px;
+    border: 2px solid rgb(175, 175, 175);
+    border-radius: 5px;
+}
+
+span.timerName {
+    width: 100px;
+    padding: 5px;
     border-radius: 5px;
 }
 
@@ -60,17 +80,47 @@ button {
     border-color: rgb(100, 100, 100) rgb(22, 22, 22) rgb(22, 22, 22) rgb(100, 100, 100);
 }
 
+button#submit {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: medium;
+}
+
+div.measure {
+    margin: 30px;
+}
+
+a.measure {
+    padding: 10px 50px;
+    background-color: rgb(249, 146, 146);
+    border: 2px solid silver;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+div.timerName {
+    padding: 10px 50px;
+    background-color: rgb(249, 146, 146);
+    border: 2px solid silver;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
 button:active {
     /*background: linear-gradient(to right, rgba(96, 95, 95, 0.75) 0%, rgba(53, 53, 53, 0.75) 100%);*/
     border-image-slice: 1;
     border-color: rgb(22, 22, 22) rgb(100, 100, 100) rgb(100, 100, 100) rgb(22, 22, 22);
 }
 
-button:disabled {
-    width: 100%;
+button.disabled {
+    font-weight: bold;
 }
 
-p {
+p.QRcode {
     text-align: center;
     text-decoration: underline;
     color: blue;
@@ -80,7 +130,7 @@ img {
     display: none;
 }
 
-.QRcode {
+img.QRcode {
     display: block;
     position: absolute;
     top: 10vh;
@@ -89,13 +139,12 @@ img {
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
     box-sizing: border-box;
     width: 100%;
     text-align: center;
     background-color: azure;
     padding: 20px;
+    margin-top: 20px;
 }
 
 .hidden {
