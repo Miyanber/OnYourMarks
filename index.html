@@ -65,16 +65,27 @@
 
     <section class="timer hidden">
         <div>
-            <button id="finish">!!!Finished!!!</button>
+            <button id="finish">STOP</button>
             <p id="time"></p>
-            <button id="submit">データを送信</button>
-            <p id="data"></p>
+            <button id="submit" disabled>タイムを送信</button>
         </div>
     </section>
 
     <section>
+        <div>
+            <h3>結果</h3>
+            <table id="record">
+                <tr>
+                    <th colspan="3"><button id="getRecords">結果を更新</button></th>
+                </tr>
+                <tr>
+                    <th>回</th><th>着順</th><th>タイム</th>
+                </tr>
+            </table>
+        </div>
         <div class="measure">
-            <a class="measure hidden" href="./setting/index.html">タイム計測コード変更・役割変更</a>
+            <a class="measure hidden" href="./setting/index.html">タイム計測コード変更<span
+                    style="display:inline-block;">・役割変更</span></a>
         </div>
     </section>
 

@@ -25,7 +25,8 @@ table td {
     padding: 5px;
 }
 
-table.measure td, table.measure th{
+table.measure td,
+table.measure th {
     padding: 50px 50px;
     border-top: 5px solid rgb(138, 21, 0);
     border-bottom: 5px solid rgb(138, 21, 0);
@@ -70,6 +71,12 @@ h2 {
     font-style: italic;
 }
 
+h3 {
+    border-bottom: 2px solid rgb(138, 21, 0);
+    margin: 40px;
+    margin-bottom: 0px;
+}
+
 button {
     padding: 20px 40px;
     font-size: larger;
@@ -82,39 +89,66 @@ button {
 
 button#submit {
     padding: 10px 20px;
-    margin-top: 20px;
+    background: none;
+    border-color: rgb(76, 76, 76) rgb(22, 22, 22) rgb(22, 22, 22) rgb(76, 76, 76);
+    background-color: rgb(100, 100, 100);
+}
+
+button#submit:disabled {
+    padding: 10px 20px;
+    background: none;
+    color: rgba(255, 255, 255, 0.2);
+    border-color: rgb(199, 199, 199) rgb(184, 184, 184) rgb(184, 184, 184) rgb(199, 199, 199);
+    background-color: rgb(159, 159, 159);
+}
+
+button#getRecords {
+    padding: 5px 10px;
     font-size: medium;
 }
 
+button#getRecords:disabled {
+    color: rgba(255, 255, 255, 0.2);
+}
+
 div.measure {
+    padding: 10px 10px;
+    background-color: rgb(249, 146, 146);
+    border: 2px solid silver;
+    border-radius: 20px;
     margin: 30px;
 }
 
 a.measure {
-    padding: 10px 50px;
-    background-color: rgb(249, 146, 146);
-    border: 2px solid silver;
-    border-radius: 20px;
     font-weight: bold;
     text-decoration: none;
     color: black;
 }
 
 div.timerName {
-    padding: 10px 50px;
-    background-color: rgb(249, 146, 146);
-    border: 2px solid silver;
-    border-radius: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    color: black;
+    padding: 10px 10px;
 }
 
 button:active {
     /*background: linear-gradient(to right, rgba(96, 95, 95, 0.75) 0%, rgba(53, 53, 53, 0.75) 100%);*/
-    border-image-slice: 1;
     border-color: rgb(22, 22, 22) rgb(100, 100, 100) rgb(100, 100, 100) rgb(22, 22, 22);
 }
+
+table#record td,
+table#record th {
+    padding: 10px;
+    width: 75px;
+    border: 2px solid rgb(96, 96, 96);
+}
+
+table#record th {
+    background-color: rgb(204, 204, 204);
+}
+
+table#record td {
+    padding: 5px;
+}
+
 
 button.disabled {
     font-weight: bold;
@@ -149,4 +183,14 @@ footer {
 
 .hidden {
     display: none;
+}
+
+@media screen and (max-width: 780px) {
+
+    table.measure td,
+    table.measure th {
+        padding: 20px 20px;
+        border-top: 5px solid rgb(138, 21, 0);
+        border-bottom: 5px solid rgb(138, 21, 0);
+    }
 }
