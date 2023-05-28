@@ -120,6 +120,43 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         img.classList.toggle("QRcode");
     })
+
+    const records = document.getElementById("record");
+    const tbody = records.firstElementChild;
+    getRecords.addEventListener("click", () => {
+        let paramater = `?timerName=${localStorage.getItem("timerName")}&status=record&now=${new Date().getTime()}`;
+        getRecords.disabled = true;
+        fetch('https://script.google.com/macros/s/AKfycbzbWTISwrAgyEYXsJFZrKEZ5FlMrRSgF2OZYm2RTlVVyktLQvWvxl0gAYRPfZdIz_QP/exec' + paramater, {
+            "headers": {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((json) => {
+            const array = json.allData;
+            const tbody_children_length = tbody.children.length;
+            for (let i = tbody_children_length - 1; i > 1; i--) {
+                tbody.children[i].remove();
+            }
+            for (let i = 0; i < array.length; i++) {
+                for (let j = 0; j < array[i].length; j++) {
+                    const tr = document.createElement("tr");
+                    const td2 = document.createElement("td"); td2.innerHTML = j + 1;
+                    const td3 = document.createElement("td"); td3.innerHTML = array[i][j];
+                    if (j == 0) {
+                        const td1 = document.createElement("td"); td1.innerHTML = i + 1;
+                        tr.appendChild(td1);
+                        td1.setAttribute("rowSpan", array[i].length);
+                    }
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tbody.appendChild(tr);
+                }
+            }
+            getRecords.disabled = false;
+        });
+    })
 });
 
 function sleep(sec) {
