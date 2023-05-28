@@ -1,19 +1,24 @@
-const onYourMarks = new Audio("mp3/onyourmark.mp3");
-const set = new Audio("mp3/set.mp3");
-const go = new Audio("mp3/go.mp3");
+const onYourMarks = new Audio("../mp3/onyourmark.mp3");
+const set = new Audio("../mp3/set.mp3");
+const go = new Audio("../mp3/go.mp3");
 
 window.addEventListener("DOMContentLoaded", () => {
+    const timerName = document.querySelector("input.timerName");
+    if (localStorage.getItem("timerName") !== null) {
+        timerName.value = localStorage.getItem("timerName");
+    }
+
     const div = document.querySelectorAll("div.offers div");
     if (div.length !== 3) {
         console.warn("");
     }
-    div[1].addEventListener("click", () => {
-        window.location.href = "./measure/starter.html";
+    div[0].addEventListener("click", () => {
+        window.location.href = "../index.html";
     })
     div[2].addEventListener("click", () => {
-        window.location.href = "./measure/timer.html";
+        window.location.href = "./timer.html";
     })
-    div[0].classList.add("active");
+    div[1].classList.add("active");
 
     const line1 = document.getElementById("interval1_line");
     const number1 = document.getElementById("interval1_number");
@@ -45,6 +50,16 @@ window.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById("start");
     const status = document.getElementById("status");
     button.addEventListener("click", async () => {
+        if (timerName.value == "") {
+            const button = document.getElementById("start");
+            const status = document.getElementById("status");
+            button.classList.add("hidden");
+            status.classList.remove("hidden");
+            status.innerHTML = "タイム計測コードを入力して下さい";
+            return
+        }
+        localStorage.setItem("timerName", timerName.value);
+
         button.classList.add("hidden");
         status.classList.remove("hidden");
         status.innerHTML = "On Your Marks";
@@ -66,8 +81,30 @@ window.addEventListener("DOMContentLoaded", () => {
             await sleep(number2.value);
         }
 
-        await go.play();            //Go!
-        status.innerHTML = "Go!";
+        status.innerHTML = "Go!";   //Go!
+        const now = new Date().getTime();
+        performance.mark("start");
+        await go.play();
+        performance.mark("finish");
+        performance.measure(
+            "NAME",
+            "start",
+            "finish"
+        )
+        console.log(performance.getEntriesByName("NAME")[0])
+        if (localStorage.getItem("timerName") !== null) {
+            let paramater = `?timerName=${localStorage.getItem("timerName")}&status=starter&now=${now}`;
+            await fetch('https://script.google.com/macros/s/AKfycbzbWTISwrAgyEYXsJFZrKEZ5FlMrRSgF2OZYm2RTlVVyktLQvWvxl0gAYRPfZdIz_QP/exec' + paramater, {
+                "headers": {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then((response) => {
+                return response.json();
+            }).then((json) => {
+                const message = json.allData;
+            });
+        }
         await sleep(1);
         button.classList.remove("hidden");
         status.classList.add("hidden");

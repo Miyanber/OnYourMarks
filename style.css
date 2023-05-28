@@ -111,22 +111,49 @@ button#getRecords:disabled {
     color: rgba(255, 255, 255, 0.2);
 }
 
+section.setting {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+section.setting div {
+    margin: 10px;
+}
+
+div.offers div {
+    padding: 20px 20px;
+    background-color: rgb(146, 221, 249);
+    border-top: 5px solid silver;
+    border-right: 5px solid rgb(100, 100, 100);
+    border-bottom: 5px solid rgb(100, 100, 100);
+    border-left: 5px solid silver;
+    border-radius: 0px;
+    width: 8em;
+    margin: 5px;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+div.offers div.active {
+    color: white;
+    background-color: rgb(58, 139, 252);
+    border-top: 5px solid rgb(100, 100, 100);
+    border-right: 5px solid silver;
+    border-bottom: 5px solid silver;
+    border-left: 5px solid rgb(100, 100, 100);
+}
+
+div.offers div:not([active]):hover {
+    background-color: rgb(100, 165, 255);
+}
+
 div.measure {
-    padding: 10px 10px;
+    padding: 10px 20px;
     background-color: rgb(249, 146, 146);
     border: 2px solid silver;
     border-radius: 20px;
-    margin: 30px;
-}
-
-a.measure {
-    font-weight: bold;
-    text-decoration: none;
-    color: black;
-}
-
-div.timerName {
-    padding: 10px 10px;
+    display: inline-block;
 }
 
 button:active {
