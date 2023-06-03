@@ -47,18 +47,26 @@ window.addEventListener("DOMContentLoaded", () => {
         number2.disabled = true;
     })
 
+    async function setTimerName(timerName) {
+        if (timerName == "") {
+            button.classList.add("hidden");
+            status.classList.remove("hidden");
+            status.innerHTML = "<span>タイム計測コードを</span><span>入力して下さい</span>";
+            await sleep(3);
+            button.classList.remove("hidden");
+            status.classList.add("hidden");
+            return false
+        } else {
+            localStorage.setItem("timerName", timerName);
+            return true
+        }
+    }
+
+    const getRecords = document.getElementById("getRecords");
     const button = document.getElementById("start");
     const status = document.getElementById("status");
     button.addEventListener("click", async () => {
-        if (timerName.value == "") {
-            const button = document.getElementById("start");
-            const status = document.getElementById("status");
-            button.classList.add("hidden");
-            status.classList.remove("hidden");
-            status.innerHTML = "タイム計測コードを入力して下さい";
-            return
-        }
-        localStorage.setItem("timerName", timerName.value);
+        if (await setTimerName(timerName.value) === false) return;
 
         button.classList.add("hidden");
         status.classList.remove("hidden");
@@ -124,6 +132,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const records = document.getElementById("record");
     const tbody = records.firstElementChild;
     getRecords.addEventListener("click", () => {
+        if (setTimerName(timerName) === false) return;
+
         let paramater = `?timerName=${localStorage.getItem("timerName")}&status=record&now=${new Date().getTime()}`;
         getRecords.disabled = true;
         fetch('https://script.google.com/macros/s/AKfycbzbWTISwrAgyEYXsJFZrKEZ5FlMrRSgF2OZYm2RTlVVyktLQvWvxl0gAYRPfZdIz_QP/exec' + paramater, {

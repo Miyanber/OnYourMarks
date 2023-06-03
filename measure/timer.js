@@ -27,30 +27,35 @@ window.addEventListener("DOMContentLoaded", () => {
         img.classList.toggle("QRcode");
     })
 
+    async function setTimerName(timerName) {
+        if (timerName == "") {
+            submit.classList.add("hidden");
+            status.classList.remove("hidden");
+            status.innerHTML = "<span>タイム計測コードを</span><span>入力して下さい</span>";
+            await sleep(3);
+            submit.classList.remove("hidden");
+            status.classList.add("hidden");
+            return false
+        } else {
+            localStorage.setItem("timerName", timerName);
+            return true
+        }
+    }
+
     const submit = document.getElementById("submit");
-    const finished = document.getElementById("finish");
+    const button = document.getElementById("finish");
     const getRecords = document.getElementById("getRecords");
     const finishTime = document.getElementById("time");
+    const status = document.getElementById("status");
     let finishTimeArray = [];
-    finished.addEventListener("click", () => {
+    button.addEventListener("click", () => {
         const now = Date.now();
         finishTime.innerHTML += `${finishTimeArray.length + 1} : ${now}<br>`;
         finishTimeArray.push(now);
         submit.disabled = false;
     })
-    submit.addEventListener("click", () => {
-        if (timerName.value == "") {
-            const button = document.getElementById("start");
-            const status = document.getElementById("status");
-            button.classList.add("hidden");
-            status.classList.remove("hidden");
-            status.innerHTML = "タイム計測コードを入力して下さい";
-            sleep(3);
-            button.classList.remove("hidden");
-            status.classList.add("hidden");
-            return
-        }
-        localStorage.setItem("timerName", timerName.value);
+    submit.addEventListener("click", async () => {
+        if (await setTimerName(timerName.value) === false) return;
 
         submit.disabled = true;
         const now = Date.now();
