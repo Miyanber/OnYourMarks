@@ -48,7 +48,8 @@ window.addEventListener("DOMContentLoaded", () => {
     })
 
     async function setTimerName(timerName) {
-        if (timerName == "") {
+        console.log(timerName)
+        if (timerName === "") {
             button.classList.add("hidden");
             status.classList.remove("hidden");
             status.innerHTML = "<span>タイム計測コードを</span><span>入力して下さい</span>";
@@ -132,7 +133,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const records = document.getElementById("record");
     const tbody = records.firstElementChild;
     getRecords.addEventListener("click", () => {
-        if (setTimerName(timerName) === false) return;
+        if (setTimerName(timerName.value) === false) return;
 
         let paramater = `?timerName=${localStorage.getItem("timerName")}&status=record&now=${new Date().getTime()}`;
         getRecords.disabled = true;
@@ -149,19 +150,28 @@ window.addEventListener("DOMContentLoaded", () => {
             for (let i = tbody_children_length - 1; i > 1; i--) {
                 tbody.children[i].remove();
             }
-            for (let i = 0; i < array.length; i++) {
-                for (let j = 0; j < array[i].length; j++) {
-                    const tr = document.createElement("tr");
-                    const td2 = document.createElement("td"); td2.innerHTML = j + 1;
-                    const td3 = document.createElement("td"); td3.innerHTML = array[i][j];
-                    if (j == 0) {
-                        const td1 = document.createElement("td"); td1.innerHTML = i + 1;
-                        tr.appendChild(td1);
-                        td1.setAttribute("rowSpan", array[i].length);
+            if (array.length === 0) {
+                const tr = document.createElement("tr");
+                const td = document.createElement("td");
+                td.innerHTML = "記録なし";
+                td.colSpan = 3;
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+            } else {
+                for (let i = 0; i < array.length; i++) {
+                    for (let j = 0; j < array[i].length; j++) {
+                        const tr = document.createElement("tr");
+                        const td2 = document.createElement("td"); td2.innerHTML = j + 1;
+                        const td3 = document.createElement("td"); td3.innerHTML = array[i][j];
+                        if (j == 0) {
+                            const td1 = document.createElement("td"); td1.innerHTML = i + 1;
+                            tr.appendChild(td1);
+                            td1.setAttribute("rowSpan", array[i].length);
+                        }
+                        tr.appendChild(td2);
+                        tr.appendChild(td3);
+                        tbody.appendChild(tr);
                     }
-                    tr.appendChild(td2);
-                    tr.appendChild(td3);
-                    tbody.appendChild(tr);
                 }
             }
             getRecords.disabled = false;
