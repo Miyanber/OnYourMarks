@@ -25,13 +25,6 @@ table td {
     padding: 5px;
 }
 
-table.measure td,
-table.measure th {
-    padding: 50px 50px;
-    border-top: 5px solid rgb(138, 21, 0);
-    border-bottom: 5px solid rgb(138, 21, 0);
-}
-
 input[type=range] {
     width: 200px;
 }
@@ -40,19 +33,6 @@ input[type=number] {
     width: 50px;
     padding: 5px;
     border: 2px solid rgb(175, 175, 175);
-    border-radius: 5px;
-}
-
-input.timerName {
-    width: 150px;
-    padding: 5px;
-    border: 2px solid rgb(175, 175, 175);
-    border-radius: 5px;
-}
-
-span.timerName {
-    width: 100px;
-    padding: 5px;
     border-radius: 5px;
 }
 
@@ -77,8 +57,8 @@ h3 {
     margin-bottom: 0px;
 }
 
-button {
-    padding: 20px 40px;
+button#start, button#finish {
+    padding: 20px 50px;
     font-size: larger;
     color: white;
     background: linear-gradient(to right, rgb(138, 138, 138) 0%, rgb(53, 53, 53) 100%);
@@ -89,36 +69,43 @@ button {
 
 button#submit {
     padding: 10px 20px;
-    background: none;
     border-color: rgb(76, 76, 76) rgb(22, 22, 22) rgb(22, 22, 22) rgb(76, 76, 76);
     background-color: rgb(100, 100, 100);
 }
 
 button#submit:disabled {
     padding: 10px 20px;
-    background: none;
     color: rgba(255, 255, 255, 0.2);
     border-color: rgb(199, 199, 199) rgb(184, 184, 184) rgb(184, 184, 184) rgb(199, 199, 199);
     background-color: rgb(159, 159, 159);
 }
 
 button#getRecords {
-    padding: 5px 10px;
+    color: white;
+    padding: 5px 20px;
     font-size: medium;
+    border-radius: 10px;
+    border-color: rgb(76, 76, 76);
+    background-color: rgb(100, 100, 100);
 }
 
 button#getRecords:disabled {
     color: rgba(255, 255, 255, 0.2);
 }
 
+button:active {
+    /*background: linear-gradient(to right, rgba(96, 95, 95, 0.75) 0%, rgba(53, 53, 53, 0.75) 100%);*/
+    border-color: rgb(22, 22, 22) rgb(100, 100, 100) rgb(100, 100, 100) rgb(22, 22, 22);
+}
+
+button.disabled {
+    font-weight: bold;
+}
+
 section.setting {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
-}
-
-section.setting div {
-    margin: 10px;
 }
 
 div.offers div {
@@ -149,16 +136,25 @@ div.offers div:not([active]):hover {
 }
 
 div.measure {
-    padding: 10px 20px;
+    margin: 20px;
+    padding: 20px 20px;
     background-color: rgb(249, 146, 146);
     border: 2px solid silver;
     border-radius: 20px;
     display: inline-block;
 }
 
-button:active {
-    /*background: linear-gradient(to right, rgba(96, 95, 95, 0.75) 0%, rgba(53, 53, 53, 0.75) 100%);*/
-    border-color: rgb(22, 22, 22) rgb(100, 100, 100) rgb(100, 100, 100) rgb(22, 22, 22);
+input.timerName {
+    width: 150px;
+    padding: 5px;
+    border: 2px solid rgb(175, 175, 175);
+    border-radius: 5px;
+}
+
+span.timerName {
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 table#record td,
@@ -176,11 +172,6 @@ table#record td {
     padding: 5px;
 }
 
-
-button.disabled {
-    font-weight: bold;
-}
-
 p.QRcode {
     text-align: center;
     text-decoration: underline;
@@ -193,7 +184,7 @@ img {
 
 img.QRcode {
     display: block;
-    position: absolute;
+    position: fixed;
     top: 10vh;
     left: calc(50vw - 145px);
     border: 5px solid silver;
@@ -213,11 +204,27 @@ footer {
 }
 
 @media screen and (max-width: 780px) {
+    div.offers div {
+        padding: 10px 20px;
+        border-width: 3px;
+        width: auto;
+        margin: 5px;
+    }
 
-    table.measure td,
-    table.measure th {
-        padding: 20px 20px;
-        border-top: 5px solid rgb(138, 21, 0);
-        border-bottom: 5px solid rgb(138, 21, 0);
+    div.offers div.no-measure {
+        width: 70%;
+    }
+
+    div.offers div.active {
+        color: white;
+        background-color: rgb(58, 139, 252);
+        border-top: 3px solid rgb(100, 100, 100);
+        border-right: 3px solid silver;
+        border-bottom: 3px solid silver;
+        border-left: 3px solid rgb(100, 100, 100);
+    }
+
+    input.timerName {
+        width: 30%;
     }
 }
